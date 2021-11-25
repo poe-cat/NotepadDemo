@@ -35,6 +35,10 @@ public class GUI implements ActionListener {
         createMenuBar();
         createFileMenu();
         createFormatMenu();
+
+        functionFormat.selectedFont = "Arial";
+        functionFormat.createFont(16);
+        functionFormat.wordWrap();
         window.setVisible(true);
     }
 
@@ -146,7 +150,7 @@ public class GUI implements ActionListener {
 
         itemFontSize24 = new JMenuItem("24");
         itemFontSize24.addActionListener(this);
-        itemFontSize24.setActionCommand("size24n");
+        itemFontSize24.setActionCommand("size24");
         menuFontSize.add(itemFontSize24);
 
         itemFontSize28 = new JMenuItem("28");
@@ -166,6 +170,15 @@ public class GUI implements ActionListener {
             case "Save" -> functionFile.save();
             case "Exit" -> functionFile.exit();
             case "Word Wrap" -> functionFormat.wordWrap();
+            case "Arial" -> functionFormat.setFont(command);
+            case "Comic Sans MS" -> functionFormat.setFont(command);
+            case "Times New Roman" -> functionFormat.setFont(command);
+            case "size8" -> functionFormat.createFont(8);
+            case "size12" -> functionFormat.createFont(12);
+            case "size16" -> functionFormat.createFont(16);
+            case "size20" -> functionFormat.createFont(20);
+            case "size24" -> functionFormat.createFont(24);
+            case "size28" -> functionFormat.createFont(28);
         }
     }
 }

@@ -1,8 +1,12 @@
 package main;
 
+import java.awt.*;
+
 public class FunctionFormat {
 
     GUI gui;
+    Font arial, comicSansMS, timesNewRoman;
+    String selectedFont;
 
     public FunctionFormat(GUI gui) {
         this.gui = gui;
@@ -20,6 +24,25 @@ public class FunctionFormat {
             gui.textArea.setLineWrap(false);
             gui.textArea.setWrapStyleWord(false);
             gui.itemWrap.setText("Word Wrap: Off");
+        }
+    }
+
+    public void createFont(int fontSize) {
+
+        arial = new Font("Arial", Font.PLAIN, fontSize);
+        comicSansMS = new Font("Comic Sans MS", Font.PLAIN, fontSize);
+        timesNewRoman = new Font("Times New Roman", Font.PLAIN, fontSize);
+
+        setFont(selectedFont);
+    }
+
+    public void setFont(String font) {
+        selectedFont = font;
+
+        switch(selectedFont) {
+            case "Arial" -> gui.textArea.setFont(arial);
+            case "Comic Sans MS" -> gui.textArea.setFont(comicSansMS);
+            case "Times New Roman" -> gui.textArea.setFont(timesNewRoman);
         }
     }
 }
