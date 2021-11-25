@@ -165,7 +165,7 @@ public class GUI implements ActionListener {
             case "Save as" -> functionFile.saveAs();
             case "Save" -> functionFile.save();
             case "Exit" -> functionFile.exit();
-//            case "Word Wrap" ->
+            case "Word Wrap" -> functionFormat.wordWrap();
         }
     }
 }
