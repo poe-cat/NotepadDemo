@@ -71,12 +71,18 @@ public class GUI implements ActionListener {
         menuFile.add(itemOpen);
 
         itemSave = new JMenuItem("Save");
+        itemSave.addActionListener(this);
+        itemSave.setActionCommand("Save");
         menuFile.add(itemSave);
 
         itemSaveAs = new JMenuItem("Save as");
+        itemSaveAs.addActionListener(this);
+        itemSaveAs.setActionCommand("Save as");
         menuFile.add(itemSaveAs);
 
         itemExit = new JMenuItem("Exit");
+        itemExit.addActionListener(this);
+        itemExit.setActionCommand("Exit");
         menuFile.add(itemExit);
     }
 
@@ -87,6 +93,9 @@ public class GUI implements ActionListener {
         switch (command) {
             case "New" -> functionFile.newFile();
             case "Open" -> functionFile.open();
+            case "Save as" -> functionFile.saveAs();
+            case "Save" -> functionFile.save();
+
         }
 
     }
