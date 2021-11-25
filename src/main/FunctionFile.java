@@ -2,7 +2,6 @@ package main;
 
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
@@ -85,5 +84,9 @@ public class FunctionFile {
         } catch(Exception e) {
             System.out.println("SOMETHING IS WRONG");
         }
+    }
+
+    public void exit() {
+        System.exit(0);
     }
 }

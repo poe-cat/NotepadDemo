@@ -95,8 +95,7 @@ public class GUI implements ActionListener {
             case "Open" -> functionFile.open();
             case "Save as" -> functionFile.saveAs();
             case "Save" -> functionFile.save();
-
+            case "Exit" -> functionFile.exit();
         }
-
     }
 }
