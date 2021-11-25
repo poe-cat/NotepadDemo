@@ -21,9 +21,12 @@ public class GUI implements ActionListener {
     JMenuItem itemWrap, itemFontArial, itemFontCSMS, itemFontTNR,
             itemFontSize8, itemFontSize12, itemFontSize16, itemFontSize20, itemFontSize24, itemFontSize28 ;
     JMenu menuFont, menuFontSize;
+    // COLOR MENU
+    JMenuItem  itemColor1, itemColor2, itemColor3;
 
     FunctionFile functionFile = new FunctionFile(this);
     FunctionFormat functionFormat = new FunctionFormat(this);
+    FunctionColor functionColor = new FunctionColor(this);
 
     public static void main(String args[]) {
         new GUI();
@@ -35,10 +38,12 @@ public class GUI implements ActionListener {
         createMenuBar();
         createFileMenu();
         createFormatMenu();
+        createColorMenu();
 
         functionFormat.selectedFont = "Arial";
         functionFormat.createFont(16);
         functionFormat.wordWrap();
+        functionColor.changeColor("White");
         window.setVisible(true);
     }
 
@@ -159,6 +164,24 @@ public class GUI implements ActionListener {
         menuFontSize.add(itemFontSize28);
     }
 
+    public void createColorMenu() {
+        itemColor1 = new JMenuItem("White");
+        itemColor1.addActionListener(this);
+        itemColor1.setActionCommand("White");
+        menuColor.add(itemColor1);
+
+        itemColor2 = new JMenuItem("Black");
+        itemColor2.addActionListener(this);
+        itemColor2.setActionCommand("Black");
+        menuColor.add(itemColor2);
+
+        itemColor3 = new JMenuItem("Blue");
+        itemColor3.addActionListener(this);
+        itemColor3.setActionCommand("Blue");
+        menuColor.add(itemColor3);
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -179,6 +202,9 @@ public class GUI implements ActionListener {
             case "size20" -> functionFormat.createFont(20);
             case "size24" -> functionFormat.createFont(24);
             case "size28" -> functionFormat.createFont(28);
+            case "White" -> functionColor.changeColor(command);
+            case "Black" -> functionColor.changeColor(command);
+            case "Blue" -> functionColor.changeColor(command);
         }
     }
 }
