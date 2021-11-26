@@ -12,7 +12,7 @@ public class GUI implements ActionListener {
     JFrame window;
 
     //TEXT AREA
-    JTextArea textArea;
+    JTextAreaPlus textArea;
     JScrollPane scrollPane;
     boolean wordWrapOn = false;
     // TOP MENU BAR
@@ -65,7 +65,7 @@ public class GUI implements ActionListener {
     }
 
     public void createTextArea() {
-        textArea = new JTextArea();
+        textArea = new JTextAreaPlus();
 
         textArea.addKeyListener(keyHandler);
 
@@ -80,6 +80,8 @@ public class GUI implements ActionListener {
 
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("yoda.png"));
+        textArea.setImage(icon);
         window.add(scrollPane);
     }
 
