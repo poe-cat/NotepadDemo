@@ -81,7 +81,7 @@ public class GUI implements ActionListener {
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("yoda.png"));
-        textArea.setImage(icon);
+        textArea.setImage(icon, 600, 400, 136, 150);
         window.add(scrollPane);
     }
 
