@@ -17,7 +17,7 @@ public class GUI implements ActionListener {
     boolean wordWrapOn = false;
     // TOP MENU BAR
     JMenuBar menuBar;
-    JMenu menuFile, menuEdit, menuFormat, menuColor;
+    JMenu menuFile, menuEdit, menuFormat, menuColor, menuMusic;
     // FILE MENU
     JMenuItem itemNew, itemOpen, itemSave, itemSaveAs, itemExit;
     // EDIT MENU
@@ -28,11 +28,18 @@ public class GUI implements ActionListener {
     JMenu menuFont, menuFontSize;
     // COLOR MENU
     JMenuItem  itemColor1, itemColor2, itemColor3;
+    // MUSIC MENU
+    JMenuItem itemStarWars;
+
 
     FunctionFile functionFile = new FunctionFile(this);
     FunctionFormat functionFormat = new FunctionFormat(this);
     FunctionColor functionColor = new FunctionColor(this);
     FunctionEdit functionEdit = new FunctionEdit(this);
+
+    Music music = new Music(this);
+    String musicSW = ".//res//imperial_march.wav";
+
 
     KeyHandler keyHandler = new KeyHandler(this);
 
@@ -50,6 +57,7 @@ public class GUI implements ActionListener {
         createEditMenu();
         createFormatMenu();
         createColorMenu();
+        createMusicMenu();
 
         functionFormat.selectedFont = "Arial";
         functionFormat.createFont(16);
@@ -100,6 +108,9 @@ public class GUI implements ActionListener {
 
         menuColor = new JMenu("Color");
         menuBar.add(menuColor);
+
+        menuMusic = new JMenu("Music");
+        menuBar.add(menuMusic);
     }
 
     public void createFileMenu() {
@@ -218,6 +229,13 @@ public class GUI implements ActionListener {
         menuColor.add(itemColor3);
     }
 
+    public void createMusicMenu() {
+        itemStarWars = new JMenuItem("Star Wars");
+        itemStarWars.addActionListener(this);
+        itemStarWars.setActionCommand("Star Wars");
+        menuMusic.add(itemStarWars);
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -244,6 +262,10 @@ public class GUI implements ActionListener {
             case "White" -> functionColor.changeColor(command);
             case "Black" -> functionColor.changeColor(command);
             case "Blue" -> functionColor.changeColor(command);
+            case "Star Wars" -> {
+                music.setFile(musicSW);
+                music.play();
+            }
         }
     }
 }
