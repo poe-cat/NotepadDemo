@@ -1,6 +1,9 @@
 package main;
 
 import javax.swing.*;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.undo.UndoManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +20,8 @@ public class GUI implements ActionListener {
     JMenu menuFile, menuEdit, menuFormat, menuColor;
     // FILE MENU
     JMenuItem itemNew, itemOpen, itemSave, itemSaveAs, itemExit;
+    // EDIT MENU
+    JMenuItem itemUndo, itemRedo;
     // FORMAT MENU
     JMenuItem itemWrap, itemFontArial, itemFontCSMS, itemFontTNR,
             itemFontSize8, itemFontSize12, itemFontSize16, itemFontSize20, itemFontSize24, itemFontSize28 ;
@@ -27,6 +32,9 @@ public class GUI implements ActionListener {
     FunctionFile functionFile = new FunctionFile(this);
     FunctionFormat functionFormat = new FunctionFormat(this);
     FunctionColor functionColor = new FunctionColor(this);
+    FunctionEdit functionEdit = new FunctionEdit(this);
+
+    UndoManager undoManager = new UndoManager();
 
     public static void main(String args[]) {
         new GUI();
@@ -37,6 +45,7 @@ public class GUI implements ActionListener {
         createTextArea();
         createMenuBar();
         createFileMenu();
+        createEditMenu();
         createFormatMenu();
         createColorMenu();
 
@@ -55,6 +64,16 @@ public class GUI implements ActionListener {
 
     public void createTextArea() {
         textArea = new JTextArea();
+
+        textArea.getDocument().addUndoableEditListener(
+                new UndoableEditListener() {
+                    @Override
+                    public void undoableEditHappened(UndoableEditEvent e) {
+                        undoManager.addEdit(e.getEdit());
+                    }
+                }
+        );
+
         scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         window.add(scrollPane);
@@ -103,6 +122,18 @@ public class GUI implements ActionListener {
         itemExit.addActionListener(this);
         itemExit.setActionCommand("Exit");
         menuFile.add(itemExit);
+    }
+
+    public void createEditMenu() {
+        itemUndo = new JMenuItem("Undo");
+        itemUndo.addActionListener(this);
+        itemUndo.setActionCommand("Undo");
+        menuEdit.add(itemUndo);
+
+        itemRedo = new JMenuItem("Redo");
+        itemRedo.addActionListener(this);
+        itemRedo.setActionCommand("Redo");
+        menuEdit.add(itemRedo);
     }
 
     public void createFormatMenu() {
@@ -192,6 +223,8 @@ public class GUI implements ActionListener {
             case "Save as" -> functionFile.saveAs();
             case "Save" -> functionFile.save();
             case "Exit" -> functionFile.exit();
+            case "Undo" -> functionEdit.undo();
+            case "Redo" -> functionEdit.redo();
             case "Word Wrap" -> functionFormat.wordWrap();
             case "Arial" -> functionFormat.setFont(command);
             case "Comic Sans MS" -> functionFormat.setFont(command);
