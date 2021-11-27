@@ -29,17 +29,15 @@ public class GUI implements ActionListener {
     // COLOR MENU
     JMenuItem  itemColor1, itemColor2, itemColor3;
     // MUSIC MENU
-    JMenuItem itemStarWars;
-
+    JMenuItem itemStarWars, itemPiano;
 
     FunctionFile functionFile = new FunctionFile(this);
     FunctionFormat functionFormat = new FunctionFormat(this);
     FunctionColor functionColor = new FunctionColor(this);
     FunctionEdit functionEdit = new FunctionEdit(this);
-
     Music music = new Music(this);
-    String musicSW = ".//res//imperial_march.wav";
 
+    String musicSW = ".//res//imperial_march.wav";
 
     KeyHandler keyHandler = new KeyHandler(this);
 
@@ -234,6 +232,11 @@ public class GUI implements ActionListener {
         itemStarWars.addActionListener(this);
         itemStarWars.setActionCommand("Star Wars");
         menuMusic.add(itemStarWars);
+
+        itemPiano = new JMenuItem("Piano");
+        itemPiano.addActionListener(this);
+        itemPiano.setActionCommand("Piano");
+        menuMusic.add(itemPiano);
     }
 
 
